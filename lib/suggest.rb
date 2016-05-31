@@ -7,7 +7,7 @@ module Suggest
     columns = column_names.zip(column_types).to_h
     where_clauses = []
     params.each do |key, value|
-      next if !columns.keys.include? key
+      next if !columns.keys.include? key or value.nil?
       where_clauses << comp_exp(value,columns[key],key)
     end
     where_query = where_clauses.join(' AND ')
@@ -30,14 +30,14 @@ module Suggest
   end
 
   def comp_exp_str value, name
-    "name ilike '%#{value.downcase.gsub(/[\s,]+/,'%')}%'"
+    "#{name} ilike '%#{value.downcase.gsub(/[\s,]+/,'%')}%'"
   end
 
   def comp_exp_num value, name
-    if /^[^\d]{1,2}/.match(value).nil?
-      "name = #{value}"
+    if /^[^\d]{1,2}/.match(value.to_s).nil?
+      "#{name} = #{value}"
     else
-      "name #{value}"
+      "#{name} #{value}"
     end
   end
 end

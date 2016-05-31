@@ -19,8 +19,21 @@ Or install it yourself as:
     $ gem install suggest
 
 ## Usage
-
-TODO: Write usage instructions here
+Extend it, it's a class method.
+````ruby
+class People
+    extend Suggest
+end
+````
+Start searching.
+````
+search_params = {"name"=>"adi kumar","age"="21","height"=">182"}
+People.suggest search_params
+=> [#<Person id: 154778, name: "Aditya Kumar", age: "21", height: "191", weight: "91">,
+#<Person id: 475768, name: "Adi Kumar", age: "21", height: "185", weight: "71">,
+#<Person id: 714278, name: "aditi kumari", age: "21", height: "189", weight: "88">,
+#<Person id: 165468, name: "S. Aditya Kumaraswamy", age: "21", height: "183", weight: "102">]
+````
 
 ## Development
 
