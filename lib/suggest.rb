@@ -1,5 +1,6 @@
 require "suggest/version"
 
 module Suggest
-  # Your code goes here...
+  def suggest params
+  end
 end
